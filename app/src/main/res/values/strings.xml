@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">EcoFun</string>
+    <string name="jungleImageViewTransition">jungleImageViewTransitionString</string>
+    <string name="animalsCarImageViewTransition">animalsCarImageViewTransitionString</string>
+
+
+    <string name="jungleBackgroundDescription">Jungle Background</string>
+    <string name="cityBackgroundDescription"> City Background </string>
+    <string name="animalsCarDescription">Car with Animals moving</string>
+    <string name="woodenBoardDescription">A Wooden Board With Text</string>
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="or_signup">Or, Signup!</string>
+    <string name="orSocial">or Login With Social Media...</string>
+    <string name="signUp">SignUp</string>
+    <string name="orLogin">Or, Login!</string>
+
+    <string name="transition_loginWithSocial">LoginSocialTransition</string>
+    <string name="facebook_app_id">244702353372510</string>
+    <string name="fb_login_protocol_scheme">fb244702353372510</string>
+
+    <string name="activity_recognition_description"> Need your permission to recognise your activity, like walking, running, going by vehicle, etc.  so that we can start calculating distance so you can earn points! </string>
+    <string name="location_description">Need your permission to access your location for calculating distance for your points</string>
+    <string name="location_background_description">Need your permission to access your background location in order to calculate your distance even in the background!</string>
+    <string name="storage_description">Need your permission to read your storage so that you can upload photos as profile pic and upload you doing good deeds to earn points!</string>
+    <string name="ACTIVITY_RECOGNITION">Activity Recognition</string>
+    <string name="FINE_LOCATION">Access Fine Location</string>
+    <string name="BACKGROUND_LOCATION">Access Background Location</string>
+    <string name="EXTERNAL_STORAGE">Access Your Storage</string>
+    <string name="monkey_contentDescription">Monkey Holding Wooden Board showing App Logo</string>
+    <string name="copyrights_credit">Made by Manas Malla ©</string>
+    <string name="login_with_social">Login With Social</string>
+    <string name="sign_in_with_google_button_description">Sign In With Google Button</string>
+    <string name="sign_in_with_facebook_button_description">Sign In With Facebook Button</string>
+    <string name="sign_in_with_twitter_button_description">Sign In With Twitter Button</string>
+    <string name="sign_in_with_instagram_button_description">Sign In With Instagram Button</string>
+</resources>

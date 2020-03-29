@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SocialLoginActivity">
+
+    <ImageView
+        android:id="@+id/jungleBackgroundImageView_socialLoginActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/jungleBackgroundDescription"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/jungleImageViewTransition"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.45"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/jungle_background"/>
+
+    <ImageView
+        android:id="@+id/animalsCarImageView_socialLoginActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginTop="75dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/animalsCarDescription"
+        android:transitionName="@string/animalsCarImageViewTransition"
+        app:layout_constraintBottom_toBottomOf="@id/jungleBackgroundImageView_socialLoginActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/animals_group" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/socialLoginSignUpCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="16dp"
+        app:cardBackgroundColor="#3ddc84"
+        app:elevation="8dp"
+        android:transitionName="@string/transition_loginWithSocial"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/creditsTextView_socialLoginActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/gilroy_xbold"
+                android:gravity="center_horizontal"
+                android:text="@string/login_with_social"
+                android:textAlignment="center"
+                android:textSize="36sp"
+                app:layout_constraintBottom_toTopOf="@id/socialLoginButtons_Layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/socialLoginButtons_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/google_sign_in_button"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/sign_in_with_google_button_description"
+                    app:layout_constraintBottom_toTopOf="@id/facebook_loginButton"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:paddingEnd="8dp"
+                    app:srcCompat="@drawable/signin_with_google" />
+
+                <ImageView
+                    android:id="@+id/facebook_loginButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/sign_in_with_facebook_button_description"
+                    app:layout_constraintBottom_toTopOf="@id/twitter_loginButton"
+                    app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
+                    app:layout_constraintStart_toStartOf="@id/google_sign_in_button"
+                    app:srcCompat="@drawable/facebook_login" />
+
+                <ImageView
+                    android:id="@+id/twitter_loginButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/sign_in_with_twitter_button_description"
+                    app:layout_constraintBottom_toTopOf="@id/instagram_loginButton"
+                    app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
+                    app:layout_constraintStart_toStartOf="@id/google_sign_in_button"
+                    app:srcCompat="@drawable/twitter_login" />
+
+                <ImageView
+                    android:id="@+id/instagram_loginButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/sign_in_with_instagram_button_description"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@id/google_sign_in_button"
+                    app:layout_constraintStart_toStartOf="@id/google_sign_in_button"
+                    app:srcCompat="@drawable/instagram_login" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/creditsTextView_socialLoginActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/kgfont"
+        android:gravity="center_horizontal"
+        android:text="@string/copyrights_credit"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
