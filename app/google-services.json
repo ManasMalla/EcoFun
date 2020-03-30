@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "550192301617",
+    "firebase_url": "https://ecofun-1585241662843.firebaseio.com",
+    "project_id": "ecofun-1585241662843",
+    "storage_bucket": "ecofun-1585241662843.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550192301617:android:3153206a06ead6b97cb710",
+        "android_client_info": {
+          "package_name": "com.manasmalla.ecofun"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550192301617-n51a3nbo2v7bfhoe4jv82io95ijclm9n.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.manasmalla.ecofun",
+            "certificate_hash": "adfc5fa34029c3c23ef486e42e65cc5f0c905b7e"
+          }
+        },
+        {
+          "client_id": "550192301617-hg8dgkdf7sv32muelu7dp3grh98b0efn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAkoB2w2iN7PVp65eB9Vui5MmTUWWi9BvA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550192301617-hg8dgkdf7sv32muelu7dp3grh98b0efn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

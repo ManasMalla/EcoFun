@@ -23,13 +23,11 @@
         android:id="@+id/animalsCarImageView_socialLoginActivity"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
-        android:layout_marginTop="75dp"
         android:adjustViewBounds="true"
         android:contentDescription="@string/animalsCarDescription"
         app:layout_constraintBottom_toBottomOf="@id/jungleBackgroundImageView_socialLoginActivity"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/animals_group" />
 
     <com.google.android.material.card.MaterialCardView
@@ -97,6 +95,7 @@
                     android:layout_marginBottom="16dp"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/sign_in_with_google_button_description"
+                    android:onClick="googleSignIn"
                     app:layout_constraintBottom_toTopOf="@id/facebook_loginButton"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -156,5 +155,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

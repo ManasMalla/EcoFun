@@ -36,4 +36,6 @@
     <string name="sign_in_with_facebook_button_description">Sign In With Facebook Button</string>
     <string name="sign_in_with_twitter_button_description">Sign In With Twitter Button</string>
     <string name="sign_in_with_instagram_button_description">Sign In With Instagram Button</string>
+    <string name="EmailId">Enter your email ID!</string>
+    <string name="continueButton">Continue</string>
 </resources>
