@@ -14,6 +14,9 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -72,6 +76,8 @@ public class SocialLoginActivity extends AppCompatActivity {
     ImageView googleSignInButton, facebookSignInButton, twitterSignInButton, instagramSignInButton;
     boolean emailAlreadyAvailable;
     String socialUserIDParse;
+    MaterialCardView webViewMaterialCardView;
+    WebView webView;
 
     public static String sentenceCaseForText(String text) {
 
@@ -135,6 +141,9 @@ public class SocialLoginActivity extends AppCompatActivity {
         facebookSignInButton = findViewById(R.id.facebook_loginButton);
         twitterSignInButton = findViewById(R.id.twitter_loginButton);
         instagramSignInButton = findViewById(R.id.instagram_loginButton);
+
+        webViewMaterialCardView = findViewById(R.id.webViewMaterialCardView_socialLoginActivity);
+        webView = findViewById(R.id.webView_socialLoginActivity);
 
         if (socialSignedInStringArray[1].matches("true")) {
             socialSignedIn = true;
@@ -202,8 +211,20 @@ public class SocialLoginActivity extends AppCompatActivity {
     }
 
     public void instagramSignIn(View view) {
-        //Nothing happening
-        Toast.makeText(getApplicationContext(), "Feature Coming Soon!", Toast.LENGTH_SHORT).show();
+
+        webView.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.i("instagramRedirect", webView.getUrl());
+                return false;
+            }
+        });
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl("https://www.instagram.com/oauth/authorize?client_id=499049874307431&redirect_uri=https://manasmalla.github.io/&scope=user_profile%2Cuser_media&response_type=code");
+        webViewMaterialCardView.setVisibility(View.VISIBLE);
+        Log.i("instagram", webView.getUrl());
+
+
     }
 
     public void twitterOnClick(View view) {
@@ -397,7 +418,7 @@ public class SocialLoginActivity extends AppCompatActivity {
                                             Intent intent = new Intent(SocialLoginActivity.this, PermissionActivity.class);
                                             intent.putExtra("firstRun", true);
                                             startActivity(intent);
-                                        }else{
+                                        } else {
                                             Toast.makeText(SocialLoginActivity.this, "Error, logging you into your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -446,7 +467,6 @@ public class SocialLoginActivity extends AppCompatActivity {
                     }
                 }
             });
-
 
 
         }
