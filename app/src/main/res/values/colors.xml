@@ -3,4 +3,89 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <!-- Screens background color-->
+    <color name="bg_screen1">#1b0c22</color>
+    <color name="bg_screen3">#737474</color>
+    <color name="bg_screen2">#69b342</color>
+    <color name="bg_screen4">#4285f4</color>
+    <color name="bg_screen5">#f86734</color>
+    <color name="bg_screen6">#a4d7ea</color>
+    <color name="bg_screen7">#3ddc84</color>
+    <color name="bg_screen8">#4285f4</color>
+    <color name="bg_screen9">#183942</color>
+
+
+    <color name="bg_screen_activityRecognition">#f86734</color>
+    <color name="bg_screen_location">#737474</color>
+    <color name="bg_screen_backgroundLocation">#a4d7ea</color>
+    <color name="bg_screen_storage">#3ddc84</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#313366</color>
+    <color name="dot_dark_screen2">#026944</color>
+    <color name="dot_dark_screen4">#073042</color>
+    <color name="dot_dark_screen5">#ff4200</color>
+    <color name="dot_dark_screen3">#383838</color>
+    <color name="dot_dark_screen6">#1e7192</color>
+    <color name="dot_dark_screen7">#128f4a</color>
+    <color name="dot_dark_screen8">#073042</color>
+    <color name="dot_dark_screen9">#128f4a</color>
+
+
+    <color name="dot_dark_screen_activityRecognition">#ff4200</color>
+    <color name="dot_dark_screen_location">#383838</color>
+    <color name="dot_dark_screen_backgroundLocation">#1e7192</color>
+    <color name="dot_dark_screen_storage">#128f4a</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#6f7090</color>
+    <color name="dot_light_screen2">#479a3a</color>
+    <color name="dot_light_screen4">#fff</color>
+    <color name="dot_light_screen5">#fff</color>
+    <color name="dot_light_screen3">#4f4f4f</color>
+    <color name="dot_light_screen6">#5ea5c1</color>
+    <color name="dot_light_screen7">#fff</color>
+    <color name="dot_light_screen8">#fff</color>
+    <color name="dot_light_screen9">#128f4a</color>
+
+    <color name="dot_light_screen_activityRecognition">#fff</color>
+    <color name="dot_light_screen_location">#4f4f4f</color>
+    <color name="dot_light_screen_backgroundLocation">#5ea5c1</color>
+    <color name="dot_light_screen_storage">#fff</color>
+
+    <array name="array_dot_active">
+        <item>@color/dot_light_screen1</item>
+        <item>@color/dot_light_screen2</item>
+        <item>@color/dot_light_screen3</item>
+        <item>@color/dot_light_screen4</item>
+        <item>@color/dot_light_screen5</item>
+        <item>@color/dot_light_screen6</item>
+        <item>@color/dot_light_screen7</item>
+        <item>@color/dot_light_screen8</item>
+        <item>@color/dot_light_screen9</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/dot_dark_screen1</item>
+        <item>@color/dot_dark_screen2</item>
+        <item>@color/dot_dark_screen3</item>
+        <item>@color/dot_dark_screen4</item>
+        .<item>@color/dot_dark_screen5</item>
+        <item>@color/dot_dark_screen6</item>
+        <item>@color/dot_dark_screen7</item>
+        <item>@color/dot_dark_screen8</item>
+        <item>@color/dot_dark_screen9</item>
+    </array>
+
+
+    <array name="array_dot_active_notFirstRun">
+        <item>@color/dot_light_screen8</item>
+        <item>@color/dot_light_screen9</item>
+    </array>
+
+    <array name="array_dot_inactive_notFirstRun">
+        <item>@color/dot_dark_screen8</item>
+        <item>@color/dot_dark_screen9</item>
+    </array>
 </resources>

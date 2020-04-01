@@ -14,6 +14,8 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -21,6 +23,8 @@ import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -32,6 +36,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -49,15 +54,35 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class SocialLoginActivity extends AppCompatActivity {
 
@@ -72,6 +97,9 @@ public class SocialLoginActivity extends AppCompatActivity {
     ImageView googleSignInButton, facebookSignInButton, twitterSignInButton, instagramSignInButton;
     boolean emailAlreadyAvailable;
     String socialUserIDParse;
+    MaterialCardView webViewMaterialCardView;
+    WebView webView;
+    String instagramAuthURL;
 
     public static String sentenceCaseForText(String text) {
 
@@ -135,6 +163,10 @@ public class SocialLoginActivity extends AppCompatActivity {
         facebookSignInButton = findViewById(R.id.facebook_loginButton);
         twitterSignInButton = findViewById(R.id.twitter_loginButton);
         instagramSignInButton = findViewById(R.id.instagram_loginButton);
+
+        webViewMaterialCardView = findViewById(R.id.webViewMaterialCardView_socialLoginActivity);
+        webView = findViewById(R.id.webView_socialLoginActivity);
+        instagramAuthURL = "https://www.instagram.com/oauth/authorize?client_id=499049874307431&redirect_uri=https://manasmalla.github.io/&scope=user_profile%2Cuser_media&response_type=code";
 
         if (socialSignedInStringArray[1].matches("true")) {
             socialSignedIn = true;
@@ -202,8 +234,163 @@ public class SocialLoginActivity extends AppCompatActivity {
     }
 
     public void instagramSignIn(View view) {
-        //Nothing happening
-        Toast.makeText(getApplicationContext(), "Feature Coming Soon!", Toast.LENGTH_SHORT).show();
+
+        webView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                // Here put your code
+                if (url.startsWith("https://manasmalla.github.io/?code=")) {
+                    Log.i("redirctAuthURL", url);
+                    String preAcessCode = url.replace("https://manasmalla.github.io/?code=", "").replace("#_", "");
+                    String[] codesInstagram = new String[]{"499049874307431", "a65d069e650bfed723339873180c19cf", "https://manasmalla.github.io/", preAcessCode};
+                    CallAPI taskInstagram = new CallAPI();
+                    String accessTokenJSON = null;
+                    try {
+                        accessTokenJSON = taskInstagram.execute(codesInstagram).get();
+                        JSONObject jObject = new JSONObject(accessTokenJSON);
+                       String accessToken =  jObject.getString("access_token");
+                       String userIDInstagram = jObject.getString("user_id");
+
+                        Log.i("accessToken", accessToken);
+                        Log.i("acessUID", userIDInstagram);
+                        AccessToken accessToken1 = AccessToken.getCurrentAccessToken();
+                        GraphRequest request = GraphRequest.newGraphPathRequest(accessToken1,"/" + userIDInstagram+ "/picture",
+                                new GraphRequest.Callback() {
+                                    @Override
+                                    public void onCompleted(GraphResponse response) {
+                                        // Insert your code here
+                                        Log.i("respons", response.toString());
+                                    }
+                                });
+
+                        request.executeAsync();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                // return true; //Indicates WebView to NOT load the url;
+                return false; //Allow WebView to load url
+            }
+        });
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.loadUrl(instagramAuthURL);
+        webViewMaterialCardView.setVisibility(View.VISIBLE);
+        Log.i("redirectURL", webView.getUrl());
+    }
+
+    private void updateUI(FirebaseUser user, final String identifier) {
+
+        if (user != null) {
+            Toast.makeText(this, user.getDisplayName() + " <" + user.getProviderData().get(1).getEmail() + ">", Toast.LENGTH_SHORT).show();
+            String userPhotoURL = String.valueOf(user.getPhotoUrl());
+            if (identifier.matches("FACEBOOK")) {
+                userPhotoURL = userPhotoURL + "?height=512";
+            } else if (identifier.matches("TWITTER")) {
+                userPhotoURL = userPhotoURL.replace("_normal", "");
+            }
+            userPhotoURL = userPhotoURL.replace("s96-c", "s512-c");
+            Log.i("profileURL", userPhotoURL);
+
+            if (identifier.matches("GOOGLE")) {
+                googleSignedIn = true;
+                getSharedPreferences("com.manasmalla.ecofun", MODE_PRIVATE).edit().putBoolean("isGoogleSignedIn", true).apply();
+                googleSignInButton.setImageResource(R.drawable.google_logout);
+            } else if (identifier.matches("FACEBOOK")) {
+                facebookSignedIn = true;
+                getSharedPreferences("com.manasmalla.ecofun", MODE_PRIVATE).edit().putBoolean("isFacebookSignedIn", true).apply();
+                facebookSignInButton.setImageResource(R.drawable.facebook_logout);
+            } else if (identifier.matches("TWITTER")) {
+                twitterSignedIn = true;
+                getSharedPreferences("com.manasmalla.ecofun", MODE_PRIVATE).edit().putBoolean("isTwitterSignedIn", true).apply();
+                twitterSignInButton.setImageResource(R.drawable.twitter_logout);
+            }
+
+            //Check Email ID
+            final String emailID = user.getProviderData().get(1).getEmail();
+
+            final String identifierName = sentenceCaseForText(identifier);
+            final String profilePhotoDownloadURL = userPhotoURL;
+
+            ParseQuery<ParseUser> userParseQuery = ParseUser.getQuery();
+            userParseQuery.whereEqualTo("email", emailID);
+            userParseQuery.findInBackground(new FindCallback<ParseUser>() {
+                @Override
+                public void done(List<ParseUser> objects, ParseException e) {
+                    if (e == null) {
+                        if (objects.size() > 0) {
+                            emailAlreadyAvailable = true;
+                            socialUserIDParse = objects.get(0).getUsername();
+                        } else {
+                            emailAlreadyAvailable = false;
+                        }
+
+                        if (emailAlreadyAvailable) {
+
+                            Log.i("userExists", socialUserIDParse);
+                            if (socialUserIDParse != null || !socialUserIDParse.isEmpty()) {
+                                ParseUser.logInInBackground(socialUserIDParse, "password", new LogInCallback() {
+                                    @Override
+                                    public void done(ParseUser user, ParseException e) {
+                                        if (e == null) {
+                                            Intent intent = new Intent(SocialLoginActivity.this, PermissionActivity.class);
+                                            intent.putExtra("firstRun", true);
+                                            startActivity(intent);
+                                        } else {
+                                            Toast.makeText(SocialLoginActivity.this, "Error, logging you into your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+                            }
+                        } else {
+
+                            Bitmap bitmap = downloadImage(profilePhotoDownloadURL);
+
+                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                            byte[] byteArray = stream.toByteArray();
+                            final ParseFile profilePic = new ParseFile("profile" + identifierName + ".png", byteArray);
+                            profilePic.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if (e == null) {
+                                        ParseUser parseUser = new ParseUser();
+                                        parseUser.setUsername(emailID);
+                                        parseUser.setPassword("password");
+                                        parseUser.setEmail(emailID);
+                                        parseUser.put("profilePic", profilePic);
+                                        parseUser.signUpInBackground(new SignUpCallback() {
+                                            @Override
+                                            public void done(ParseException e) {
+                                                if (e == null) {
+                                                    Toast.makeText(getApplicationContext(), "Please update your username later in Settings Activity! Please dont change your passowrd as that can affect your social account!", Toast.LENGTH_LONG).show();
+                                                    Intent intent = new Intent(SocialLoginActivity.this, PermissionActivity.class);
+                                                    intent.putExtra("firstRun", true);
+                                                    startActivity(intent);
+                                                } else {
+                                                    Toast.makeText(SocialLoginActivity.this, "Error, signing you into your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        });
+                                    } else {
+                                        Toast.makeText(SocialLoginActivity.this, "Error, saving your photo into your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+
+                        }
+
+                    } else {
+                        Toast.makeText(SocialLoginActivity.this, "Error, finding your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+
+        }
     }
 
     public void twitterOnClick(View view) {
@@ -340,115 +527,68 @@ public class SocialLoginActivity extends AppCompatActivity {
                 });
     }
 
-    private void updateUI(FirebaseUser user, final String identifier) {
+    public class CallAPI extends AsyncTask<String, String, String> {
 
-        if (user != null) {
-            Toast.makeText(this, user.getDisplayName() + " <" + user.getProviderData().get(1).getEmail() + ">", Toast.LENGTH_SHORT).show();
-            String userPhotoURL = String.valueOf(user.getPhotoUrl());
-            if (identifier.matches("FACEBOOK")) {
-                userPhotoURL = userPhotoURL + "?height=512";
-            } else if (identifier.matches("TWITTER")) {
-                userPhotoURL = userPhotoURL.replace("_normal", "");
-            }
-            userPhotoURL = userPhotoURL.replace("s96-c", "s512-c");
-            Log.i("profileURL", userPhotoURL);
+        String CLIENT_ID, CLIENT_SECRET, REDIRECT_URI_AUTH, code;
 
-            if (identifier.matches("GOOGLE")) {
-                googleSignedIn = true;
-                getSharedPreferences("com.manasmalla.ecofun", MODE_PRIVATE).edit().putBoolean("isGoogleSignedIn", true).apply();
-                googleSignInButton.setImageResource(R.drawable.google_logout);
-            } else if (identifier.matches("FACEBOOK")) {
-                facebookSignedIn = true;
-                getSharedPreferences("com.manasmalla.ecofun", MODE_PRIVATE).edit().putBoolean("isFacebookSignedIn", true).apply();
-                facebookSignInButton.setImageResource(R.drawable.facebook_logout);
-            } else if (identifier.matches("TWITTER")) {
-                twitterSignedIn = true;
-                getSharedPreferences("com.manasmalla.ecofun", MODE_PRIVATE).edit().putBoolean("isTwitterSignedIn", true).apply();
-                twitterSignInButton.setImageResource(R.drawable.twitter_logout);
-            }
+        public CallAPI(){
+            //set context variables if required
+        }
 
-            //Check Email ID
-            final String emailID = user.getProviderData().get(1).getEmail();
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
-            final String identifierName = sentenceCaseForText(identifier);
-            final String profilePhotoDownloadURL = userPhotoURL;
+        @Override
+        protected String doInBackground(String... paramsMethod) {
+            CLIENT_ID = paramsMethod[0];
+            CLIENT_SECRET = paramsMethod[1];
+            REDIRECT_URI_AUTH = paramsMethod[2];
+            code = paramsMethod[3];
+            try {
+                HttpClient httpclient = new DefaultHttpClient();
+                HttpPost httppost = new
+                        HttpPost("https://api.instagram.com/oauth/access_token");
 
-            ParseQuery<ParseUser> userParseQuery = ParseUser.getQuery();
-            userParseQuery.whereEqualTo("email", emailID);
-            userParseQuery.findInBackground(new FindCallback<ParseUser>() {
-                @Override
-                public void done(List<ParseUser> objects, ParseException e) {
-                    if (e == null) {
-                        if (objects.size() > 0) {
-                            emailAlreadyAvailable = true;
-                            socialUserIDParse = objects.get(0).getUsername();
-                        } else {
-                            emailAlreadyAvailable = false;
-                        }
+                // Request parameters and other properties.
+                List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+                params.add(new BasicNameValuePair("client_id", CLIENT_ID));
+                params.add(new BasicNameValuePair("client_secret", CLIENT_SECRET));
+                params.add(new BasicNameValuePair("grant_type", "authorization_code"));
+                params.add(new BasicNameValuePair("redirect_uri",  REDIRECT_URI_AUTH));
+                params.add(new BasicNameValuePair("code",  code));
 
-                        if (emailAlreadyAvailable) {
 
-                            Log.i("userExists", socialUserIDParse);
-                            if (socialUserIDParse != null || !socialUserIDParse.isEmpty()) {
-                                ParseUser.logInInBackground(socialUserIDParse, "password", new LogInCallback() {
-                                    @Override
-                                    public void done(ParseUser user, ParseException e) {
-                                        if (e == null) {
-                                            Intent intent = new Intent(SocialLoginActivity.this, PermissionActivity.class);
-                                            intent.putExtra("firstRun", true);
-                                            startActivity(intent);
-                                        }else{
-                                            Toast.makeText(SocialLoginActivity.this, "Error, logging you into your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                            }
-                        } else {
+                httppost.setEntity(new UrlEncodedFormEntity(params, "UTF-8"));
 
-                            Bitmap bitmap = downloadImage(profilePhotoDownloadURL);
+                //Execute and get the response.
+                HttpResponse response = httpclient.execute(httppost);
+                HttpEntity entity = response.getEntity();
+                //System.out.println("entity "+ entity.getContent());
 
-                            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                            byte[] byteArray = stream.toByteArray();
-                            final ParseFile profilePic = new ParseFile("profile" + identifierName + ".png", byteArray);
-                            profilePic.saveInBackground(new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    if (e == null) {
-                                        ParseUser parseUser = new ParseUser();
-                                        parseUser.setUsername(emailID);
-                                        parseUser.setPassword("password");
-                                        parseUser.setEmail(emailID);
-                                        parseUser.put("profilePic", profilePic);
-                                        parseUser.signUpInBackground(new SignUpCallback() {
-                                            @Override
-                                            public void done(ParseException e) {
-                                                if (e == null) {
-                                                    Toast.makeText(getApplicationContext(), "Please update your username later in Settings Activity! Please dont change your passowrd as that can affect your social account!", Toast.LENGTH_LONG).show();
-                                                    Intent intent = new Intent(SocialLoginActivity.this, PermissionActivity.class);
-                                                    intent.putExtra("firstRun", true);
-                                                    startActivity(intent);
-                                                } else {
-                                                    Toast.makeText(SocialLoginActivity.this, "Error, signing you into your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
-                                    } else {
-                                        Toast.makeText(SocialLoginActivity.this, "Error, saving your photo into your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            });
-
-                        }
-
-                    } else {
-                        Toast.makeText(SocialLoginActivity.this, "Error, finding your account! " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                if (entity != null) {
+                    InputStream instream = entity.getContent();
+                    try {
+                        GetStringfromStream getStringfromStream = new GetStringfromStream();
+                        String curlAccessToken = getStringfromStream.getStringfromStream(instream);
+                        return (curlAccessToken);
+                        // do something useful
+                    } finally {
+                        instream.close();
                     }
                 }
-            });
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            } catch (ClientProtocolException e) {
+                e.printStackTrace();
+            } catch (UnsupportedOperationException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-
-
+            return  "Manas";
         }
     }
 

@@ -38,4 +38,17 @@
     <string name="sign_in_with_instagram_button_description">Sign In With Instagram Button</string>
     <string name="EmailId">Enter your email ID!</string>
     <string name="continueButton">Continue</string>
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="start">Start</string>
+
+    <string name="title_ws1"> Increasing Pollution </string>
+     <string name="title_ws2"> Let’s Make our Carbon Footprint Greener </string>
+    <string name="title_ws3"> Drive Less! </string>
+    <string name="title_ws4"> earn green points </string>
+     <string name="title_ws5"> More Trees = \n More Green points \n = More happiness!!</string>
+    <string name="title_ws6">Save Us &amp; the Water Body</string>
+    <string name="title_ws7">Avengers.....Assemble!!</string>
+    <string name="title_ws8">permission please!</string>
+    <string name="title_ws9">Running for some Variables!</string>
 </resources>
