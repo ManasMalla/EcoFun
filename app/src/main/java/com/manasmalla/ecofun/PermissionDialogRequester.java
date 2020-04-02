@@ -41,7 +41,7 @@ public class PermissionDialogRequester extends Application {
         return permissionsToBeRequested;
     }
 
-   /* public void setLayoutView(Context context, TextView title, TextView description, ImageView icon) {
+    public void setLayoutView(Context context, TextView title, TextView description, ImageView icon) {
         permissionsToBeRequested = checkPermissions(context);
         if (permissionsToBeRequested.get(0).matches("ACTIVITY_RECOGNITION")) {
             title.setText(R.string.ACTIVITY_RECOGNITION);
@@ -60,6 +60,6 @@ public class PermissionDialogRequester extends Application {
             description.setText(R.string.storage_description);
             icon.setImageResource(R.drawable.round_camera_alt_24);
         }
-    }*/
+    }
 
 }

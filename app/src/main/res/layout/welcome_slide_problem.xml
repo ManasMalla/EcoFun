@@ -36,7 +36,7 @@
         android:fontFamily="@font/kgmean"
         android:text="@string/title_ws1"
         android:textColor="#FFF"
-        android:textSize="30sp"
+        android:textSize="38dp"
         app:layout_constraintBottom_toTopOf="@+id/climateChange_descriptionImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

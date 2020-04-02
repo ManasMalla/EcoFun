@@ -42,13 +42,15 @@
     <string name="skip">Skip</string>
     <string name="start">Start</string>
 
-    <string name="title_ws1"> Increasing Pollution </string>
-     <string name="title_ws2"> Let’s Make our Carbon Footprint Greener </string>
-    <string name="title_ws3"> Drive Less! </string>
-    <string name="title_ws4"> earn green points </string>
-     <string name="title_ws5"> More Trees = \n More Green points \n = More happiness!!</string>
-    <string name="title_ws6">Save Us &amp; the Water Body</string>
-    <string name="title_ws7">Avengers.....Assemble!!</string>
-    <string name="title_ws8">permission please!</string>
-    <string name="title_ws9">Running for some Variables!</string>
+    <string name="title_ws1"> InCrEaSinG PoLlUtIoN </string>
+     <string name="title_ws2"> LeT’s MaKe oUr CaRbOn FOoTpRinT GrEeNeR </string>
+    <string name="title_ws3"> DrIvE LeSs! </string>
+    <string name="title_ws4"> EaRn GrEeN pOiNtS </string>
+     <string name="title_ws5"> MoRe TrEEs = \n MoRe GrEEn pOinTs \n = MoRe haPPineSS!!</string>
+    <string name="title_ws6">SaVe Us &amp; tHe WaTeR BoDy</string>
+    <string name="title_ws7">AvEnGeRs.....AsSeMbLe!!</string>
+    <string name="title_ws8">PeRmIsSioN pLeAsE!</string>
+    <string name="title_ws9">LeT\'s GeT RuNnInG!</string>
+
+
 </resources>

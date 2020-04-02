@@ -10,4 +10,6 @@
     <dimen name="slide_title">30dp</dimen>
     <dimen name="slide_desc">16dp</dimen>
     <dimen name="desc_padding">40dp</dimen>
+    <dimen name="dots_size">35dp</dimen>
+    <dimen name="pinDP">50dp</dimen>
 </resources>

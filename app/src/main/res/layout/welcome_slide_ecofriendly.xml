@@ -43,7 +43,7 @@
         android:text="@string/title_ws4"
         android:textAlignment="center"
         android:textColor="#073042"
-        android:textSize="36sp"
+        android:textSize="40dp"
         app:layout_constraintBottom_toTopOf="@+id/greenPoints_descriptionImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

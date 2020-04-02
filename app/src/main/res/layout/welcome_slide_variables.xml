@@ -22,8 +22,9 @@
         android:id="@+id/guides_bottom_ws9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
         android:adjustViewBounds="true"
-        app:layout_constraintBottom_toTopOf="@id/marginDotsBottom_ws9"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/guides_bottom_ws10" />
@@ -32,28 +33,38 @@
         android:id="@+id/variables_imageView_viewPager"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
         android:src="@drawable/earth_run"
+        app:layout_constraintBottom_toTopOf="@+id/title_welcomeScreen9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/title_welcomeScreen9"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/kgmean"
+        android:gravity="center_horizontal"
+        android:text="@string/title_ws9"
+        android:textAlignment="center"
+        android:textColor="#FFF"
+        android:textSize="45dp"
         app:layout_constraintBottom_toTopOf="@+id/variables_descriptionImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guides_top_ws9" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-
-        <ImageView
-        android:id="@+id/marginDotsBottom_ws9"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent" />
 
     <ImageView
         android:id="@+id/variables_descriptionImageView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
         android:adjustViewBounds="true"
-        app:layout_constraintBottom_toBottomOf="@+id/guides_bottom_ws9"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/data" />

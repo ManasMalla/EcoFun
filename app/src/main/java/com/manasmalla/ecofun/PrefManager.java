@@ -60,4 +60,9 @@ public class PrefManager {
         editor.commit();
     }
 
+    public void addVariablesToSharedPreferences(String presentUserContinent, String userLevel){
+        editor.putString("presentUserContinent", presentUserContinent).commit();
+        editor.putString("userLevel", userLevel).commit();
+    }
+
 }

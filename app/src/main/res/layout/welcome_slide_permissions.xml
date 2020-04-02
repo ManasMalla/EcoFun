@@ -19,13 +19,13 @@
     <ImageView
         android:id="@+id/permission_imageView_viewPager"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="48dp"
-        android:layout_marginLeft="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginRight="48dp"
+        android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
+        app:layout_constraintBottom_toTopOf="@+id/title_welcomeScreen8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -35,18 +35,18 @@
         android:id="@+id/title_welcomeScreen8"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/kgmean"
         android:gravity="center_horizontal"
         android:text="@string/title_ws8"
         android:textAlignment="center"
         android:textColor="#FFF"
-        android:textSize="45sp"
+        android:textSize="45dp"
+        app:layout_constraintBottom_toTopOf="@+id/permision_descriptionImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/permission_imageView_viewPager" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/marginDotsBottom_ws8"
@@ -56,18 +56,18 @@
 
     <ImageView
         android:id="@+id/permision_descriptionImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
         android:adjustViewBounds="true"
         app:layout_constraintBottom_toTopOf="@+id/permission_requested_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_welcomeScreen8"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/permissions" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/permission_requested_button"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
@@ -77,7 +77,7 @@
         android:text="Grant Permissions"
         android:textAllCaps="false"
         android:textColor="#f86734"
-        android:textSize="30sp"
+        android:textSize="30dp"
         app:layout_constraintBottom_toTopOf="@+id/marginDotsBottom_ws8"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

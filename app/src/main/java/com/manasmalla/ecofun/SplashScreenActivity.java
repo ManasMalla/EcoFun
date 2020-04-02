@@ -83,6 +83,10 @@ public class SplashScreenActivity extends AppCompatActivity {
         if (firstRun){
             animateBackground();
         }else{
+
+            appTitleConstraintLayout.setVisibility(View.VISIBLE);
+            appTitleConstraintLayout.setAnimation(upToDown);
+
             Handler handler = new Handler();
             Runnable runnable = new Runnable() {
                 @Override
