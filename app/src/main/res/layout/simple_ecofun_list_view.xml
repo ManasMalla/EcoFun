@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="16dp">
+
+    <ImageView
+        android:id="@+id/activityIconImageView"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="8dp"
+        android:tint="#000"
+        app:srcCompat="@drawable/round_directions_walk_24" />
+
+    <TextView
+        android:id="@+id/activityNameTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:layout_toEndOf="@+id/activityIconImageView"
+        android:layout_toRightOf="@+id/activityIconImageView"
+        android:fontFamily="@font/kg_what_the_teacher_wants"
+        android:maxLines="1"
+        android:text="Activity"
+        android:textColor="#000"
+        android:textSize="48dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/activityDistanceTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityNameTextView"
+        android:layout_alignStart="@+id/activityNameTextView"
+        android:layout_alignLeft="@+id/activityNameTextView"
+        android:fontFamily="@font/kgmean"
+        android:maxLines="1"
+        android:text="Activity TextView"
+        android:textColor="#000"
+        android:textSize="18dp" />
+
+    <TextView
+        android:id="@+id/activityValueTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityDistanceTextView"
+        android:layout_alignStart="@+id/activityDistanceTextView"
+        android:layout_alignLeft="@+id/activityDistanceTextView"
+        android:fontFamily="@font/kgmisskindergarden"
+        android:maxLines="1"
+        android:text="GreenPointsOrCO2Points"
+        android:textColor="#000"
+        android:textSize="16dp" />
+
+    <TextView
+        android:id="@+id/activityDateTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/activityValueTextView"
+        android:layout_alignStart="@+id/activityValueTextView"
+        android:layout_alignLeft="@+id/activityValueTextView"
+        android:fontFamily="@font/kgneatlyprinted"
+        android:maxLines="1"
+        android:text="Date"
+        android:textColor="#000"
+        android:textSize="20dp" />
+
+
+</RelativeLayout>

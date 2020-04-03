@@ -12,4 +12,5 @@
     <dimen name="desc_padding">40dp</dimen>
     <dimen name="dots_size">35dp</dimen>
     <dimen name="pinDP">50dp</dimen>
+    <dimen name="bottomLevelCard">8dp</dimen>
 </resources>

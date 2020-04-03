@@ -4,9 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.constraintlayout.widget.ConstraintSet;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
+import android.sax.EndElementListener;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Display;
@@ -14,26 +20,37 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.card.MaterialCardView;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Arrays;
 
 public class EarthActivity extends AppCompatActivity {
 
-    ImageView cityImageView, earthMap, earthSmile, outerSpaceFrame;
+    ImageView cityImageView, earthMap, earthSmile, outerSpaceFrame, characterImageView_levelDetailsCard;
     float dpMapHeight, dpMapWidth, dpScreenHeight, dpScreenWidth, scaleMap;
-    boolean isMapUpdated = false, isShowingLevelCard = false;
+    boolean isShowingLevelCard = false;
     MaterialCardView levelDetailsCardView;
     String mapUserContinent = "Africa", presentUserContinent, userLevel;
     ImageView pin1, pin2, pin3;
     ConstraintLayout pinLayout;
+    String[] arrayLevelDetails;
+    TextView levelTitleTextView_levelDetailsCard, characterNameTextView_levelDetailsCardView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -196,9 +213,9 @@ public class EarthActivity extends AppCompatActivity {
             outerSpaceFrame.setImageResource(R.drawable.space_earth_layer_africa);
             this.mapUserContinent = "Asia";
         }else if (toContinent.matches("Australia") || userLevel.matches("Indonesia")){
-            this.earthMap.setScaleX(3.5f);
-            this.earthMap.setScaleY(3.5f);
-            this.earthMap.animate().translationX(-1300.0f * scaleMap).translationY(-175.0f * scaleMap);
+            earthMap.setScaleX(3.5f);
+            earthMap.setScaleY(3.5f);
+            earthMap.animate().translationX(-1300.0f * scaleMap).translationY(-175.0f * scaleMap);
             outerSpaceFrame.setImageResource(R.drawable.space_earth_layer_africa);
             mapUserContinent = "Australia";
         }else if (toContinent.matches("North America")){
@@ -245,13 +262,12 @@ public class EarthActivity extends AppCompatActivity {
             mapUserContinent = "Pacific Ocean";
         }
 
-       // updatePins(mapUserContinent, userLevel);
+       updatePins(mapUserContinent, userLevel);
     }
 
-    /*
+
     public void updatePins(String presentUserContinent, String userLevel) {
-        //String str3 = str; -- prsntUserContinent
-        //String str4 = str2; --- userLevel
+
         int pin1ID = pin1.getId();
         int pin2Id = pin2.getId();
         int pin3Id = pin3.getId();
@@ -270,150 +286,125 @@ public class EarthActivity extends AppCompatActivity {
         constraintSet.constrainHeight(pin3Id, dimension);
         if (presentUserContinent.matches("Asia") && !userLevel.matches("Indonesia")) {
             constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
-            constraintSet.connect(pin1Id, 3, pinLayoutID, 3, (int) (this.scaleMap * 350.0f));
-            constraintSet.connect(pin1ID, 4, pinLayoutId, 4, 0);
-            constraintSet.connect(pin1ID, 6, pinLayoutId, 6, (int) (this.scaleMap * 80.0f));
-            constraintSet.connect(pin1ID, 7, pinLayoutId, 7, 0);
-            constraintSet.connect(pin2Id, 4, i4, 3, (int) (this.scaleMap * 50.0f));
-            constraintSet.connect(i3, 6, i4, 7, (int) (this.scaleMap * 30.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, (int) (this.scaleMap * 350.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, (int) (scaleMap * 80.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, 0);
+
+            constraintSet.connect(pin2Id, ConstraintSet.BOTTOM, pin1ID, ConstraintSet.TOP, (int) (scaleMap * 50.0f));
+            constraintSet.connect(pin2Id, ConstraintSet.START,pin1ID, ConstraintSet.END, (int) (scaleMap * 30.0f));
             constraintSet.applyTo(this.pinLayout);
-        } else if (str3.matches("Australia") || str4.matches("Indonesia")) {
-            ConstraintSet constraintSet4 = constraintSet;
-            int i5 = id;
-            int i6 = id4;
-            constraintSet4.connect(i5, 3, i6, 3, 0);
-            constraintSet4.connect(i5, 4, i6, 4, (int) (this.scaleMap * 500.0f));
-            constraintSet4.connect(i5, 6, i6, 6, 0);
-            constraintSet.connect(i5, 7, i6, 7, (int) (this.scaleMap * 150.0f));
-            ConstraintSet constraintSet5 = constraintSet;
-            int i7 = id2;
-            int i8 = id4;
-            constraintSet5.connect(i7, 3, i8, 3, (int) (this.scaleMap * 350.0f));
-            constraintSet5.connect(i7, 4, i8, 4, 0);
-            constraintSet5.connect(i7, 6, i8, 6, 0);
-            constraintSet5.connect(i7, 7, i8, 7, (int) (this.scaleMap * 100.0f));
-            int i9 = id3;
-            int i10 = id2;
-            constraintSet5.connect(i9, 3, i10, 3, (int) (this.scaleMap * 40.0f));
-            constraintSet5.connect(i9, 6, i10, 7, (int) (this.scaleMap * 175.0f));
+
+        } else if (presentUserContinent.matches("Australia") || userLevel.matches("Indonesia")) {
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, (int) (this.scaleMap * 500.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, (int) (this.scaleMap * 150.0f));
+
+            constraintSet.connect(pin2Id, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, (int) (this.scaleMap * 350.0f));
+            constraintSet.connect(pin2Id, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(pin2Id, ConstraintSet.START, pinLayoutId, ConstraintSet.START, 0);
+            constraintSet.connect(pin2Id, ConstraintSet.END, pinLayoutId, ConstraintSet.END, (int) (this.scaleMap * 100.0f));
+
+            constraintSet.connect(pin3Id, ConstraintSet.TOP, pin2Id, ConstraintSet.TOP, (int) (this.scaleMap * 40.0f));
+            constraintSet.connect(pin3Id, ConstraintSet.START, pin2Id, ConstraintSet.END, (int) (this.scaleMap * 175.0f));
+            constraintSet.setVisibility(pin3Id, ConstraintSet.VISIBLE);
             constraintSet.applyTo(this.pinLayout);
-        } else if (str3.matches("Africa")) {
-            constraintSet.setVisibility(id3, 8);
-            ConstraintSet constraintSet6 = constraintSet;
-            int i11 = id;
-            int i12 = id4;
-            constraintSet6.connect(i11, 3, i12, 3, 0);
-            constraintSet6.connect(i11, 4, i12, 4, (int) (this.scaleMap * 500.0f));
-            constraintSet6.connect(i11, 6, i12, 6, (int) (this.scaleMap * 200.0f));
-            constraintSet6.connect(i11, 7, i12, 7, 0);
-            ConstraintSet constraintSet7 = constraintSet;
-            int i13 = id2;
-            int i14 = id4;
-            constraintSet7.connect(i13, 3, i14, 3, (int) (this.scaleMap * 425.0f));
-            constraintSet7.connect(i13, 4, i14, 4, 0);
-            constraintSet7.connect(i13, 6, i14, 6, (int) (this.scaleMap * 575.0f));
-            constraintSet7.connect(i13, 7, i14, 7, 0);
+        } else if (presentUserContinent.matches("Africa")) {
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, (int) (this.scaleMap * 500.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, (int) (this.scaleMap * 200.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, 0);
+
+            constraintSet.connect(pin2Id, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, (int) (this.scaleMap * 425.0f));
+            constraintSet.connect(pin2Id, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(pin2Id, ConstraintSet.START, pinLayoutId, ConstraintSet.START, (int) (this.scaleMap * 575.0f));
+            constraintSet.connect(pin2Id, ConstraintSet.END, pinLayoutId, ConstraintSet.END, 0);
             constraintSet.applyTo(this.pinLayout);
-        } else if (str3.matches("Europe")) {
-            constraintSet.setVisibility(id3, 8);
-            ConstraintSet constraintSet8 = constraintSet;
-            int i15 = id;
-            int i16 = id4;
-            constraintSet8.connect(i15, 3, i16, 3, (int) (this.scaleMap * 100.0f));
-            constraintSet8.connect(i15, 4, i16, 4, 0);
-            constraintSet8.connect(i15, 6, i16, 6, 0);
-            ConstraintSet constraintSet9 = constraintSet;
-            constraintSet9.connect(i15, 7, i16, 7, (int) (this.scaleMap * 275.0f));
-            int i17 = id2;
-            int i18 = id;
-            constraintSet9.connect(i17, 4, i18, 4, (int) (this.scaleMap * 100.0f));
-            constraintSet9.connect(i17, 7, i18, 7, (int) (this.scaleMap * 50.0f));
+        } else if (presentUserContinent.matches("Europe")) {
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, (int) (this.scaleMap * 100.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, (int) (this.scaleMap * 275.0f));
+
+            constraintSet.connect(pin2Id, ConstraintSet.BOTTOM, pin1ID, ConstraintSet.BOTTOM, (int) (this.scaleMap * 100.0f));
+            constraintSet.connect(pin2Id, ConstraintSet.END, pin1ID, ConstraintSet.END, (int) (this.scaleMap * 50.0f));
             constraintSet.applyTo(this.pinLayout);
-        } else if (str3.matches("North America")) {
-            constraintSet.setVisibility(id3, 8);
-            ConstraintSet constraintSet10 = constraintSet;
-            int i19 = id;
-            int i20 = id4;
-            constraintSet10.connect(i19, 3, i20, 3, 0);
-            constraintSet10.connect(i19, 4, i20, 4, (int) (this.scaleMap * 100.0f));
-            constraintSet10.connect(i19, 6, i20, 6, 0);
-            constraintSet10.connect(i19, 7, i20, 7, (int) (this.scaleMap * 200.0f));
-            ConstraintSet constraintSet11 = constraintSet;
-            int i21 = id2;
-            int i22 = id;
-            constraintSet11.connect(i21, 4, i22, 3, (int) (this.scaleMap * 20.0f));
-            constraintSet11.connect(i21, 6, i22, 6, (int) (this.scaleMap * 100.0f));
+        } else if (presentUserContinent.matches("North America")) {
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, (int) (this.scaleMap * 100.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, (int) (this.scaleMap * 200.0f));
+
+            constraintSet.connect(pin2Id, ConstraintSet.BOTTOM, pin1ID, ConstraintSet.TOP, (int) (this.scaleMap * 20.0f));
+            constraintSet.connect(pin2Id, ConstraintSet.START, pin1ID, ConstraintSet.START, (int) (this.scaleMap * 100.0f));
             constraintSet.applyTo(this.pinLayout);
-        } else if (str3.matches("South America")) {
-            constraintSet.setVisibility(id3, 8);
-            ConstraintSet constraintSet12 = constraintSet;
-            int i23 = id;
-            int i24 = id4;
-            constraintSet12.connect(i23, 3, i24, 3, (int) (this.scaleMap * 100.0f));
-            constraintSet12.connect(i23, 4, i24, 4, 0);
-            ConstraintSet constraintSet13 = constraintSet;
-            constraintSet13.connect(i23, 6, i24, 6, (int) (this.scaleMap * 0.0f));
-            constraintSet13.connect(i23, 7, i24, 7, 0);
-            int i25 = id2;
-            int i26 = id;
-            constraintSet13.connect(i25, 4, i26, 3, (int) (this.scaleMap * 75.0f));
-            constraintSet13.connect(i25, 7, i26, 6, 0);
+        } else if (presentUserContinent.matches("South America")) {
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, (int) (this.scaleMap * 100.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, (int) (this.scaleMap * 0.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, 0);
+
+            constraintSet.connect(pin2Id, ConstraintSet.BOTTOM, pin1ID, ConstraintSet.TOP, (int) (this.scaleMap * 75.0f));
+            constraintSet.connect(pin2Id, ConstraintSet.END, pin1ID, ConstraintSet.START, 0);
             constraintSet.applyTo(this.pinLayout);
-        } else if (str4.matches("Arctic")) {
-            constraintSet.setVisibility(id2, 8);
-            constraintSet.setVisibility(id3, 8);
-            ConstraintSet constraintSet14 = constraintSet;
-            int i27 = id;
-            int i28 = id4;
-            constraintSet14.connect(i27, 3, i28, 3, (int) (this.scaleMap * 100.0f));
-            constraintSet14.connect(i27, 4, i28, 4, 0);
-            constraintSet14.connect(i27, 6, i28, 6, (int) (this.scaleMap * 100.0f));
-            constraintSet14.connect(i27, 7, i28, 7, 0);
+        } else if (presentUserContinent.matches("Arctic")) {
+            constraintSet.setVisibility(pin2Id, ConstraintSet.GONE);
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, (int) (this.scaleMap * 100.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, (int) (this.scaleMap * 100.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, 0);
             constraintSet.applyTo(this.pinLayout);
-        } else if (str4.matches("Antarctica")) {
-            constraintSet.setVisibility(id2, 8);
-            constraintSet.setVisibility(id3, 8);
-            ConstraintSet constraintSet15 = constraintSet;
-            int i29 = id;
-            int i30 = id4;
-            constraintSet15.connect(i29, 3, i30, 3, (int) (this.scaleMap * 300.0f));
-            constraintSet15.connect(i29, 4, i30, 4, 0);
-            constraintSet15.connect(i29, 6, i30, 6, 0);
-            constraintSet15.connect(i29, 7, i30, 7, (int) (this.scaleMap * 100.0f));
+        } else if (presentUserContinent.matches("Antarctica")) {
+            constraintSet.setVisibility(pin2Id, ConstraintSet.GONE);
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, (int) (this.scaleMap * 300.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, (int) (this.scaleMap * 100.0f));
             constraintSet.applyTo(this.pinLayout);
-        } else if (str4.matches("Atlantic Ocean")) {
-            constraintSet.setVisibility(id2, 8);
-            constraintSet.setVisibility(id3, 8);
-            int i31 = id;
-            int i32 = id4;
-            constraintSet.connect(i31, 3, i32, 3, 0);
-            constraintSet.connect(i31, 4, i32, 4, (int) (this.scaleMap * 60.0f));
-            ConstraintSet constraintSet16 = constraintSet;
-            constraintSet16.connect(i31, 6, i32, 6, (int) (this.scaleMap * 125.0f));
-            constraintSet16.connect(i31, 7, i32, 7, 0);
+
+        } else if (presentUserContinent.matches("Atlantic Ocean")) {
+            constraintSet.setVisibility(pin2Id, ConstraintSet.GONE);
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, (int) (this.scaleMap * 60.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, (int) (this.scaleMap * 125.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, 0);
             constraintSet.applyTo(this.pinLayout);
-        } else if (str4.matches("Pacific Ocean")) {
-            constraintSet.setVisibility(id2, 8);
-            constraintSet.setVisibility(id3, 8);
-            ConstraintSet constraintSet17 = constraintSet;
-            int i33 = id;
-            int i34 = id4;
-            constraintSet17.connect(i33, 3, i34, 3, 0);
-            constraintSet17.connect(i33, 4, i34, 4, (int) (this.scaleMap * 50.0f));
-            constraintSet17.connect(i33, 6, i34, 6, (int) (this.scaleMap * 75.0f));
-            constraintSet17.connect(i33, 7, i34, 7, 0);
+
+        } else if (presentUserContinent.matches("Pacific Ocean")) {
+            constraintSet.setVisibility(pin2Id, ConstraintSet.GONE);
+            constraintSet.setVisibility(pin3Id, ConstraintSet.GONE);
+
+            constraintSet.connect(pin1ID, ConstraintSet.TOP, pinLayoutId, ConstraintSet.TOP, 0);
+            constraintSet.connect(pin1ID, ConstraintSet.BOTTOM, pinLayoutId, ConstraintSet.BOTTOM, (int) (this.scaleMap * 50.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.START, pinLayoutId, ConstraintSet.START, (int) (this.scaleMap * 75.0f));
+            constraintSet.connect(pin1ID, ConstraintSet.END, pinLayoutId, ConstraintSet.END, 0);
             constraintSet.applyTo(this.pinLayout);
         }
+
     }
 
-     */
 
     private void assignUI() {
         earthMap = findViewById(R.id.earthMapImageView);
         outerSpaceFrame = findViewById(R.id.outerSpaceFrameImageView_earthActivity);
-        //levelDetailsCardView
-        //cityImageView
-        //earthSmile
+        levelDetailsCardView = findViewById(R.id.levelDetailsCard);
+        cityImageView = findViewById(R.id.cityImageView_earthActivity);
+        earthSmile = findViewById(R.id.earth_smile);
+
+        characterImageView_levelDetailsCard = findViewById(R.id.levelImageView);
+        characterNameTextView_levelDetailsCardView = findViewById(R.id.levelCharacterName);
+        levelTitleTextView_levelDetailsCard = findViewById(R.id.levelNation);
+
         Intent previousIntent = getIntent();
         presentUserContinent = previousIntent.getStringExtra("presentUserContinent");
         userLevel = previousIntent.getStringExtra("userLevel");
@@ -438,5 +429,140 @@ public class EarthActivity extends AppCompatActivity {
 
     public void showDetailsCard(View view){
 
+        levelConstants levelConstants = new levelConstants();
+
+        ConstraintSet constraintSet =  new ConstraintSet();
+        constraintSet.clone(pinLayout);
+
+        if (view.getId() == pin1.getId()){
+            Log.i("Pin", String.valueOf(1));
+           arrayLevelDetails = levelConstants.levelArray(mapUserContinent, 1);
+           constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.BOTTOM, pin1.getId(), ConstraintSet.TOP, (int) getResources().getDimension(R.dimen.bottomLevelCard));
+           constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.START, pin1.getId(), ConstraintSet.START, 0);
+            constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.END, pin1.getId(), ConstraintSet.END, 0);
+            constraintSet.applyTo(pinLayout);
+        }else if (view.getId() == pin2.getId()){
+            Log.i("Pin", String.valueOf(2));
+            arrayLevelDetails = levelConstants.levelArray(mapUserContinent, 2);
+            if (mapUserContinent.matches("Africa")){
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.BOTTOM, pin2.getId(), ConstraintSet.TOP, (int) getResources().getDimension(R.dimen.bottomLevelCard));
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.END, pin2.getId(), ConstraintSet.END, 0);
+                constraintSet.clear(levelDetailsCardView.getId(), ConstraintSet.START);
+                constraintSet.applyTo(pinLayout);
+            }else{
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.BOTTOM, pin2.getId(), ConstraintSet.TOP, (int) getResources().getDimension(R.dimen.bottomLevelCard));
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.START, pin2.getId(), ConstraintSet.START, 0);
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.END, pin2.getId(), ConstraintSet.END, 0);
+                constraintSet.applyTo(pinLayout);
+            }
+        }else if (view.getId() == pin3.getId()){
+            Log.i("Pin", String.valueOf(3));
+            arrayLevelDetails = levelConstants.levelArray(mapUserContinent, 3);
+            if (mapUserContinent.matches("Australia") || userLevel.matches("Indonesia")){
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.BOTTOM, pin3.getId(), ConstraintSet.TOP, (int) getResources().getDimension(R.dimen.bottomLevelCard));
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.END, pin3.getId(), ConstraintSet.END, 0);
+                constraintSet.clear(levelDetailsCardView.getId(), ConstraintSet.START);
+                constraintSet.applyTo(pinLayout);
+            }else {
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.BOTTOM, pin3.getId(), ConstraintSet.TOP, (int) getResources().getDimension(R.dimen.bottomLevelCard));
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.START, pin3.getId(), ConstraintSet.START, 0);
+                constraintSet.connect(levelDetailsCardView.getId(), ConstraintSet.END, pin3.getId(), ConstraintSet.END, 0);
+                constraintSet.applyTo(pinLayout);
+            }
+        }
+        if (arrayLevelDetails == null){
+            Toast.makeText(this, "Sorry Couldnt get level details!", Toast.LENGTH_SHORT).show();
+        }else {
+            String userLevelTitle = arrayLevelDetails[0];
+            String characterName = arrayLevelDetails[1];
+            Log.i(userLevelTitle, characterName);
+            int levelCharacterImageViewDrawableID = Integer.parseInt(arrayLevelDetails[2]);
+            levelTitleTextView_levelDetailsCard.setText(userLevelTitle);
+            characterNameTextView_levelDetailsCardView.setText(characterName);
+            characterImageView_levelDetailsCard.setImageResource(levelCharacterImageViewDrawableID);
+        }
+
+        if (isShowingLevelCard){
+            levelDetailsCardView.setVisibility(View.GONE);
+            isShowingLevelCard = false;
+        }else{
+            levelDetailsCardView.setVisibility(View.VISIBLE);
+            isShowingLevelCard = true;
+        }
+
+    }
+
+    public void settingsOnClick(View view){
+        Intent intent = new Intent(this, SettingsActivity.class);
+        startActivity(intent);
+    }
+    public void infoOnClick(View view){
+        Intent intent = new Intent(this, InfoActivity.class);
+        startActivity(intent);
+    }
+    public void leaderboardOnClick(View view){
+        Intent intent = new Intent(this, LeaderboardActivity.class);
+        startActivity(intent);
+    }
+    public void plantTreesOnClick(View view){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+
+            } else {
+                getPhoto();
+            }
+        } else {
+            getPhoto();
+        }
+    }
+
+    public void getPhoto() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, 250);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 250 && resultCode == RESULT_OK && data != null) {
+            Uri selectedImage = data.getData();
+            try {
+                final Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImage);
+
+                Log.i("Photo", "Received");
+
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                byte[] byteArray = stream.toByteArray();
+                ParseFile profilePic = new ParseFile("plantedTree"+  ParseUser.getCurrentUser().getUsername() +".png", byteArray);
+                ParseUser currentUser = ParseUser.getCurrentUser();
+                ParseObject plantedTree = new ParseObject("plantingTrees");
+                plantedTree.put("plantedTree", profilePic);
+                plantedTree.put("username", currentUser.getUsername());
+                plantedTree.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        if (e == null) {
+                            Log.i("Photo saved", "true");
+                            Toast.makeText(EarthActivity.this, "Uploaded Your Pic With Plant! Verifying! Will add Points once verified!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.i("Photo saved", "false");
+                            Toast.makeText(EarthActivity.this, "Pic with Plant couldn't be uploaded - please try again later.", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void mainActivityOnClick(View view){
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
+    public void journalOnClick(View view){
+        Intent intent = new Intent(this, JournalActivity.class);
+        startActivity(intent);
     }
 }

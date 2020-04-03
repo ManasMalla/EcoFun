@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.manasmalla.ecofun">
 
-    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION" />
 
     <application
@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/EcoFunTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".SocialLoginActivity"></activity>
+        <activity android:name=".JournalActivity"></activity>
+        <activity android:name=".LeaderboardActivity" />
+        <activity android:name=".InfoActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".SocialLoginActivity" />
         <activity android:name=".EarthActivity" />
         <activity android:name=".PermissionActivity" />
         <activity
@@ -30,9 +34,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-
-        <!--        Facebook login data-->
+        <activity android:name=".MainActivity" /> <!-- Facebook login data -->
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
@@ -53,7 +55,10 @@
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
 
 </manifest>
