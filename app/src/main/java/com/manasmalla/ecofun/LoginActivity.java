@@ -251,6 +251,7 @@ public class LoginActivity extends AppCompatActivity {
                             parseUser.setUsername(username);
                             parseUser.setPassword(password);
                             parseUser.setEmail(email_textInputEditText.getText().toString());
+                            parseUser.put("betaTester", true);
                             parseUser.put("profilePic", profileParseFile);
                             parseUser.signUpInBackground(new SignUpCallback() {
                                 @Override

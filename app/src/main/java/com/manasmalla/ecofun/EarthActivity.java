@@ -498,6 +498,8 @@ public class EarthActivity extends AppCompatActivity {
     }
     public void infoOnClick(View view){
         Intent intent = new Intent(this, InfoActivity.class);
+        intent.putExtra("presentUserContinent", presentUserContinent);
+        intent.putExtra("userLevel", userLevel);
         startActivity(intent);
     }
     public void leaderboardOnClick(View view){

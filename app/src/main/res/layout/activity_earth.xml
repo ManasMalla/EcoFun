@@ -195,8 +195,8 @@
 
     <ImageView
         android:id="@+id/rocketButton_earthActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:adjustViewBounds="true"
@@ -227,20 +227,23 @@
         android:id="@+id/plantTress_earthActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:adjustViewBounds="true"
         android:onClick="plantTreesOnClick"
-        app:layout_constraintBottom_toBottomOf="@+id/journalImageView_earthActivity"
+        app:layout_constraintBottom_toBottomOf="@+id/rocketButton_earthActivity"
         app:layout_constraintEnd_toStartOf="@+id/rocketButton_earthActivity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/journalImageView_earthActivity"
+        app:layout_constraintTop_toTopOf="@+id/rocketButton_earthActivity"
         app:srcCompat="@drawable/plant_trees" />
 
     <ImageView
         android:id="@+id/sunImageView_earthActivity"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:onClick="settingsOnClick"
         app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
@@ -250,8 +253,8 @@
 
     <ImageView
         android:id="@+id/infoButton_earthActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"

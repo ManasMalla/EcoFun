@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toTopOf="@+id/title_welcomeScreen7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/avengers_assemble_snip" />
+        app:srcCompat="@drawable/avengers_assemble_snip"/>
 
     <TextView
         android:id="@+id/title_welcomeScreen7"

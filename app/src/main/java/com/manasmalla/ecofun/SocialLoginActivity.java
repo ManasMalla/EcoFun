@@ -361,6 +361,7 @@ public class SocialLoginActivity extends AppCompatActivity {
                                         parseUser.setUsername(emailID);
                                         parseUser.setPassword("password");
                                         parseUser.setEmail(emailID);
+                                        parseUser.put("betaTester", true);
                                         parseUser.put("profilePic", profilePic);
                                         parseUser.signUpInBackground(new SignUpCallback() {
                                             @Override

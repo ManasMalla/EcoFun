@@ -52,5 +52,17 @@
     <string name="title_ws8">PeRmIsSioN pLeAsE!</string>
     <string name="title_ws9">LeT\'s GeT RuNnInG!</string>
 
+    <string name="developer_name">Manas Malla</string>
+    <string name="developer_description">An Enthusiastic Developer 👨‍💻! A Studious Student👨‍🎓! A Gang Leader to Bro’s n Sis!  </string>
+    <string name="socialLinks">Check me out on: \n Facebook - <a href="http://facebook.com/manasmalla.dev"> http://facebook.com/manasmalla.dev</a> \n Instagram -<a href=" http://instagram.com/malla_manas">  http://instagram.com/malla_manas </a> \n Twitter- <a href="http://twitter.com/manas_malla_">http://twitter.com/manas_malla_</a> \n Github- <a href="http://github.com/ManasMalla">http://github.com/ManasMalla</a> \n Website - <a href="https://manasmalla.github.io">https://manasmalla.github.io</a></string>
+    <string name="appTitleTransitionSocialUpdates">appTitleTransitionSocialUpdates</string>
+    <string name="jungleBackgroundSocialUpdates">jungleBackgroundSocialUpdates</string>
+    <string name="description_manasmalla_transition">description_manasmalla_transition</string>
+    <string name="leaderboard">LeAdErBoArD</string>
+    <string name="shutterstockLiscence"><a href="https://www.shutterstock.com/g/svaga\"> Jungle Background, Animals and other related Images used under license from Shutterstock.com</a>></string>
+    <string name="mapContinentLiscence"><a href="https://www.whatarethe7continents.com/free-coloring-map/\"> Earth Map used from Whatarethe7continents.com© </a>></string>
+    <string name="AWSString"><a href="https://aws.amazon.com"> Amazon Web Server hosts Parse Serves under the Free Tier Limit! \n https://aws.amazon.com/</a> </string>
+    <string name="ParseString"><a href="https://parseplatform.org/"> Parse Server helps us to store your data! \n https://parseplatform.org/</a> </string>
+
 
 </resources>

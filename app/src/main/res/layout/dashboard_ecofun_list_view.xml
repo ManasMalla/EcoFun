@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/charIconImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/elephant"
+            app:layout_constraintBottom_toBottomOf="@+id/userCharTextView"
+            app:layout_constraintEnd_toStartOf="@id/profileIconImageView"
+            app:layout_constraintStart_toEndOf="@+id/userNameTextView"
+            app:layout_constraintTop_toTopOf="@id/userNameTextView" />
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileIconImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/add_profilepic"
+            app:layout_constraintBottom_toBottomOf="@+id/charIconImageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/charIconImageView"
+            app:layout_constraintWidth_percent="0.23" />
+
+        <TextView
+            android:id="@+id/userNameTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/kgmean"
+            android:text="User"
+            android:textSize="30dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent="0.5" />
+
+        <TextView
+            android:id="@+id/levelDashboardTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/kg_what_the_teacher_wants"
+            android:text="Level TextView"
+            android:textSize="18dp"
+            app:layout_constraintEnd_toEndOf="@id/userNameTextView"
+            app:layout_constraintStart_toStartOf="@id/userNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/userNameTextView" />
+
+        <TextView
+            android:id="@+id/userGPValueTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/kgmisskindergarden"
+            android:text="GreenPointsOrCO2Points"
+            android:textSize="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/levelDashboardTextView"
+            app:layout_constraintStart_toStartOf="@id/userNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/levelDashboardTextView" />
+
+        <TextView
+            android:id="@+id/userCharTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/kgneatlyprinted"
+            android:text="Character"
+            android:textSize="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/levelDashboardTextView"
+            app:layout_constraintStart_toStartOf="@id/userNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/userGPValueTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

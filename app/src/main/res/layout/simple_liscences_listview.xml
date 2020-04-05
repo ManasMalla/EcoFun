@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/liscenceCreditImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="16dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/add_profilepic"
+            app:layout_constraintBottom_toBottomOf="@+id/liscenceCreditDescriptionTextViewTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/liscenceCreditTextViewTextView"
+            app:layout_constraintWidth_percent="0.23" />
+
+        <TextView
+            android:id="@+id/liscenceCreditTextViewTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/kgmean"
+            android:text="User"
+            android:textSize="36dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/liscenceCreditImageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/liscenceCreditDescriptionTextViewTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:autoLink="web"
+            android:fontFamily="@font/kgmisskindergarden"
+            android:text="Level TextView"
+            android:textSize="14dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/liscenceCreditTextViewTextView"
+            app:layout_constraintStart_toStartOf="@id/liscenceCreditTextViewTextView"
+            app:layout_constraintTop_toBottomOf="@+id/liscenceCreditTextViewTextView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

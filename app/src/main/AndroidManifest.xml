@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/EcoFunTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".JournalActivity"></activity>
+        <activity android:name=".SocialUpdatesActivity"></activity>
+        <activity android:name=".BetaTestersActivity" />
+        <activity android:name=".LiscencesActivity" />
+        <activity android:name=".InfoActivityScreen" />
+        <activity android:name=".JournalActivity" />
         <activity android:name=".LeaderboardActivity" />
         <activity android:name=".InfoActivity" />
         <activity android:name=".SettingsActivity" />

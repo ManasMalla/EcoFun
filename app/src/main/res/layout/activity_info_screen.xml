@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".InfoActivityScreen">
+
+    <ImageView
+        android:id="@+id/jungleBackground_infoActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        android:transitionName="@string/jungleBackgroundSocialUpdates"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/jungle_background"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/appTitleConstraintLayout_infoActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:transitionName="@string/appTitleTransitionSocialUpdates"
+        app:cornerRadius="20dp"
+        app:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+        <ImageView
+            android:id="@+id/woodenBoardImageView_infoActivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/woodenBoardDescription"
+            app:layout_constraintBottom_toBottomOf="@id/monkey_woodenBoardImageView_infoActivity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/wood_board" />
+
+        <ImageView
+            android:id="@+id/monkey_woodenBoardImageView_infoActivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/monkey_contentDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/monkey" />
+
+        <TextView
+            android:id="@+id/appTitleTextView_infoActivity"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/safari_silhoutte"
+            android:gravity="center_horizontal"
+            android:text="@string/app_name"
+            android:textAlignment="center"
+            android:textColor="#013c28"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/woodenBoardImageView_infoActivity" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
+        android:transitionName="@string/description_manasmalla_transition"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/liscences_infoActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appTitleConstraintLayout_infoActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/manasmalla_infoActivity"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/developer_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/manasmalla_Name_textView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="32dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/kg_what_the_teacher_wants"
+                android:text="@string/developer_name"
+                android:textAlignment="center"
+                app:autoSizeTextType="uniform"
+                app:layout_constraintBottom_toTopOf="@+id/manasmalla_description_TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/manasmalla_infoActivity" />
+
+            <TextView
+                android:id="@+id/manasmalla_description_TextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/kgmisskindergarden"
+                android:text="@string/developer_description"
+                android:textAlignment="center"
+                android:textColor="#000"
+                android:textSize="16dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/liscences_infoActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:onClick="liscencesOnClick"
+        app:layout_constraintBottom_toTopOf="@+id/betaTesters_infoActivity"
+        app:layout_constraintStart_toStartOf="@+id/jungleBackground_infoActivity"
+        app:layout_constraintWidth_percent="0.7"
+        app:srcCompat="@drawable/liscences" />
+
+    <ImageView
+        android:id="@+id/betaTesters_infoActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:onClick="betaTestersOnClick"
+        app:layout_constraintBottom_toTopOf="@+id/youtubeTesters_infoActivity"
+        app:layout_constraintEnd_toEndOf="@+id/jungleBackground_infoActivity"
+        app:layout_constraintWidth_percent="0.7"
+        app:srcCompat="@drawable/beta_testers" />
+
+    <ImageView
+        android:id="@+id/youtubeTesters_infoActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
+        android:onClick="youtubeOnClick"
+        app:layout_constraintBottom_toTopOf="@id/socialUpdates_infoActivity"
+        app:layout_constraintStart_toStartOf="@+id/jungleBackground_infoActivity"
+        app:layout_constraintWidth_percent="0.7"
+        app:srcCompat="@drawable/youtube_channel" />
+
+    <ImageView
+        android:id="@+id/socialUpdates_infoActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:adjustViewBounds="true"
+        android:onClick="socialUpdatesOnClick"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/jungleBackground_infoActivity"
+        app:layout_constraintWidth_percent="0.7"
+        app:srcCompat="@drawable/updates_social" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/youtubeMaterialCardView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:visibility="gone"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="30dp"
+        app:layout_constraintBottom_toBottomOf="@+id/youtubeTesters_infoActivity"
+        app:layout_constraintCircleRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appTitleConstraintLayout_infoActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/closeWebView_infoActivity"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:onClick="youtubeOnClick"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/com_facebook_close" />
+
+            <ImageView
+                android:id="@+id/closeWebView_infoActivity_layoutguides"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:visibility="invisible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/com_facebook_close" />
+
+            <TextView
+                android:id="@+id/techSafari_textView_infoActivity"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/kgmean"
+                android:gravity="center"
+                android:maxLines="1"
+                android:text="Please Subscribe"
+                app:layout_constraintBottom_toTopOf="@+id/youtubeWebView"
+                app:layout_constraintEnd_toStartOf="@+id/closeWebView_infoActivity"
+                app:layout_constraintStart_toEndOf="@id/closeWebView_infoActivity_layoutguides"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <WebView
+                android:id="@+id/youtubeWebView"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/closeWebView_infoActivity" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

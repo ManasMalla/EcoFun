@@ -6,4 +6,197 @@
     android:layout_height="match_parent"
     tools:context=".LeaderboardActivity">
 
+    <ImageView
+        android:id="@+id/jungleBackgroundDashboardActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/jungle_background" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/appTitleConstraintLayout_leaderboardActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:cornerRadius="20dp"
+        app:elevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.5">
+
+        <ImageView
+            android:id="@+id/woodenBoardImageView_leaderboardActivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/woodenBoardDescription"
+            app:layout_constraintBottom_toBottomOf="@id/monkey_woodenBoardImageView_leaderboardActivity"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@drawable/wood_board" />
+
+        <ImageView
+            android:id="@+id/monkey_woodenBoardImageView_leaderboardActivity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/monkey_contentDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/monkey" />
+
+        <TextView
+            android:id="@+id/appTitleTextView_leaderboardActivity"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="@font/kgmean"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/leaderboard"
+            android:textAlignment="center"
+            android:textColor="#013c28"
+            app:autoSizeTextType="uniform"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/woodenBoardImageView_leaderboardActivity" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/userDetails_leaderboardActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appTitleConstraintLayout_leaderboardActivity">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImageViewLeaderBoard"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/add_profilepic"
+                app:layout_constraintBottom_toBottomOf="@+id/characterDashboardTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/usernameTextView_dashboardActivity"
+                app:layout_constraintWidth_percent="0.4" />
+
+            <TextView
+                android:id="@+id/usernameTextView_dashboardActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:fontFamily="@font/kgmean"
+                android:text="User"
+                android:textSize="36dp"
+                app:layout_constraintEnd_toStartOf="@+id/profileImageViewLeaderBoard"
+                app:layout_constraintHeight_percent="0.3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/levelTextView_leaderboardActivity"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/kg_what_the_teacher_wants"
+                android:text="Level"
+                android:textSize="18dp"
+                app:layout_constraintEnd_toEndOf="@+id/usernameTextView_dashboardActivity"
+                app:layout_constraintStart_toStartOf="@+id/usernameTextView_dashboardActivity"
+                app:layout_constraintTop_toBottomOf="@+id/usernameTextView_dashboardActivity" />
+
+            <TextView
+                android:id="@+id/greenPointsLeaderboardTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/kgmisskindergarden"
+                android:text="GreenPointsOrCO2"
+                android:textSize="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/levelTextView_leaderboardActivity"
+                app:layout_constraintStart_toStartOf="@+id/levelTextView_leaderboardActivity"
+                app:layout_constraintTop_toBottomOf="@+id/levelTextView_leaderboardActivity" />
+
+            <TextView
+                android:id="@+id/characterDashboardTextView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="16dp"
+                android:fontFamily="@font/kgneatlyprinted"
+                android:text="Character"
+                android:textSize="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/greenPointsLeaderboardTextView"
+                app:layout_constraintStart_toStartOf="@+id/greenPointsLeaderboardTextView"
+                app:layout_constraintTop_toBottomOf="@+id/greenPointsLeaderboardTextView" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/leaderboardMaterialCardView_leaderboardActivity"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="8dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/characterImageView_leaderboardActivity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/userDetails_leaderboardActivity">
+
+        <LinearLayout
+            android:id="@+id/leaderboardLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/leaderboard_listView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/characterImageView_leaderboardActivity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.5"
+        app:srcCompat="@drawable/elephant" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
