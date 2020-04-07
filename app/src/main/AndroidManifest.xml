@@ -63,6 +63,16 @@
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />
+
+        <!-- Service that provides activity recognition data. Setting the android:exported attribute
+      to "false" stops other apps from starting this service, even when using an explicit
+      intent. -->
+        <service
+            android:name=".DetectedActivitiesIntentService"
+            android:exported="false" />
+
+        <service android:name=".BackgroundDetectedActivitiesService"></service>
+
     </application>
 
 </manifest>

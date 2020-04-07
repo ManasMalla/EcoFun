@@ -227,8 +227,6 @@
         android:id="@+id/plantTress_earthActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:adjustViewBounds="true"
         android:onClick="plantTreesOnClick"
         app:layout_constraintBottom_toBottomOf="@+id/rocketButton_earthActivity"
@@ -239,8 +237,8 @@
 
     <ImageView
         android:id="@+id/sunImageView_earthActivity"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="125dp"
+        android:layout_height="125dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
@@ -253,7 +251,7 @@
 
     <ImageView
         android:id="@+id/infoButton_earthActivity"
-        android:layout_width="100dp"
+        android:layout_width="75dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
@@ -273,10 +271,10 @@
         android:layout_marginEnd="8dp"
         android:adjustViewBounds="true"
         android:onClick="leaderboardOnClick"
-        app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/sunImageView_earthActivity"
         app:layout_constraintEnd_toStartOf="@+id/infoButton_earthActivity"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sunImageView_earthActivity"
         app:srcCompat="@drawable/leaderboard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
