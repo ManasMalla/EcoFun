@@ -71,13 +71,6 @@ public class SettingsActivity extends AppCompatActivity {
         password_textInputEditText = findViewById(R.id.up_password_edit_text_settingsActivity);
         password_textInputLayout = findViewById(R.id.up_password_text_input_settingsActivity);
 
-        String sharedPrefProfilePic = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this).getString("profileImage", null);
-
-        if (sharedPrefProfilePic != null && !(sharedPrefProfilePic.isEmpty())){
-            byte[] b = Base64.decode(sharedPrefProfilePic, Base64.DEFAULT);
-            Bitmap bitmap = BitmapFactory.decodeByteArray(b, 0, b.length);
-           circleImageView.setImageBitmap(bitmap);
-        }else {
 
             ParseUser currentParseUser = ParseUser.getCurrentUser();
             currentParseUser.fetchInBackground(new GetCallback<ParseObject>() {
@@ -95,14 +88,6 @@ public class SettingsActivity extends AppCompatActivity {
 
                                         Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
 
-
-                                        String encodedImage = Base64.encodeToString(data, Base64.DEFAULT);
-
-                                        SharedPreferences shre = PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this);
-                                        SharedPreferences.Editor edit = shre.edit();
-                                        edit.putString("profileImage", encodedImage);
-                                        edit.apply();
-
                                         circleImageView.setImageBitmap(bitmap);
 
                                     }
@@ -115,7 +100,6 @@ public class SettingsActivity extends AppCompatActivity {
                     }
                 }
             });
-        }
     }
 
     public void updateUserProfileOnClick(View view) {

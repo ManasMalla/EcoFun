@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -200,5 +201,10 @@ public class LeaderboardActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+
+    public void shareDashboardOnClick(View view){
+
     }
 }

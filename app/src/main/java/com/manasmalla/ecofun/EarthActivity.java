@@ -567,4 +567,5 @@ public class EarthActivity extends AppCompatActivity {
         Intent intent = new Intent(this, JournalActivity.class);
         startActivity(intent);
     }
+
 }

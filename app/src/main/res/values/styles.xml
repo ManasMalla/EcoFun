@@ -7,4 +7,14 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="FontFamilyItemActive">
+        <item name="android:fontFamily">@font/kgfont</item>
+        <item name="android:textSize">20dp</item>
+    </style>
+
+    <style name="FontFamilyItemInactive">
+        <item name="android:fontFamily">@font/kgneatlyprinted</item>
+        <item name="android:textSize">22dp</item>
+    </style>
+
 </resources>

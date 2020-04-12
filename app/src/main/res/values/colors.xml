@@ -53,6 +53,7 @@
     <color name="dot_light_screen_location">#4f4f4f</color>
     <color name="dot_light_screen_backgroundLocation">#5ea5c1</color>
     <color name="dot_light_screen_storage">#fff</color>
+    <color name="white">#FFF</color>
 
     <array name="array_dot_active">
         <item>@color/dot_light_screen1</item>

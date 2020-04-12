@@ -112,4 +112,8 @@ public class InfoActivityScreen extends AppCompatActivity {
             startActivity(intent);
         }
     }
+
+    public void shareOnClickInfo(View view){
+
+    }
 }

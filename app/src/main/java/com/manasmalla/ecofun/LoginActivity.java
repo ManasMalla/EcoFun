@@ -96,8 +96,21 @@ public class LoginActivity extends AppCompatActivity {
 
         assignUIVariables();
 
+        //clearPreferences();
+
         mAuth = FirebaseAuth.getInstance();
 
+    }
+
+    private void clearPreferences() {
+        try {
+            // clearing app data
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("pm clear com.manasmalla.ecofun");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
